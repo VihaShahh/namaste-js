@@ -1,0 +1,9 @@
+go to your root/parentdirectory
+ex: cd namaste-js
+npm install (will install all necessary packages)
+
+git diff
+git add .
+git diff --staged
+git commit -m "message" or git commit --amend
+git push origin main
