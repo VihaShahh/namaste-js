@@ -22,9 +22,100 @@ console.log(process(6,n =>n+1))//7
 //hereprocess calls callback right away with the number.
 
 // The callback runs immediately (synchronously).
-
 // The result is returned directly
+
 //asynchronous callback
 setTimeout(() =>{
     console.log("hi after some time")
 }, 3000)
+
+//===============================================
+let nums = [1,2,3,4]
+let double = nums.map(no =>no *2)
+console.log(double)//[2,4,6,8]
+
+//in event listener
+// document.getElementById("btn").addEventListener("click",function(){
+//     console.log("btn clicked")
+// })
+// // addEventListener is a higher-order function provided by the DOM API.
+
+// It takes two arguments:
+
+// The event type ("click")
+
+// A callback function (anonymous function here).
+// The callback function is not called immediately.
+// Instead, the browser stores it and waits until the "click" event happens.When the event occurs, the browser calls the callback function automatically.
+
+// So the callback is applied later, when the event fires.
+
+//============================================
+
+function fetchData(callback){
+    setTimeout(() =>{
+        console.log("data fetched")
+        callback()
+    }, 2000)
+}
+fetchData(() => console.log("processing"))
+
+//here 
+
+// // in Call fetchData You pass () => console.log("Now process the data...") as the callback.
+
+// Inside fetchData
+
+// A setTimeout is scheduled to run after 2000 ms (2 sec).
+
+// Nothing is printed yet.
+
+// Wait for 2 seconds...
+
+// JavaScript continues doing other work (non-blocking).
+
+// After 2 seconds
+
+// The code inside setTimeout runs:
+
+// First → console.log("Data fetched!");
+// prints "Data fetched!"
+
+// Then → callback(); executes your passed function.
+
+// That means → console.log("Now process the data...");
+//prints "Now process the data..."
+
+// Output (with 2 sec delay):
+// Data fetched
+// processing
+
+//==============================================
+
+//callback hell
+getUser(1, function(user){
+    getOrders(user.id, function(orders){
+        getOrderDetails(orders[0], function(details){
+            console.log(details)
+        })
+    })
+})
+//Because each next operation depends on the result of the previous one:
+
+// Need the user first → then fetch their orders → then fetch details of an order → then log it.
+
+// This style is called Callback Hell (or Pyramid of Doom) because of the nesting.
+// That’s why Promises and async/await were introduced.
+//==============================
+function checkNumber(no, callback){
+    if(no % 2 ==0){
+        callback("even")
+    }
+    else{
+        callback("odd")
+    }
+}
+checkNumber(5, (callback) => console.log(callback))//odd
+//It takes one argument (you named it callback, but actually it's just a value, e.g. "odd")
+
+// Prints that value.
