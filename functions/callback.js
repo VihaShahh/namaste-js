@@ -119,3 +119,135 @@ checkNumber(5, (callback) => console.log(callback))//odd
 //It takes one argument (you named it callback, but actually it's just a value, e.g. "odd")
 
 // Prints that value.
+
+//synchronus callback
+
+function calculates(a,b, callback){
+    return callback(a,b)
+}
+function add(a,b){
+    return a+b
+}
+function multiply(a,b)
+{
+    return a*b
+}
+console.log(calculates(2,3,add))//5
+
+//async
+
+function readFile(fileName, callback){
+    console.log("reading file", fileName)
+    setTimeout(() =>{
+        let fileData = "file data" + fileName
+        callback(fileData)
+    }, 2000)
+}
+
+readFile("data.txt", (data) =>{
+    console.log("file data recieved", data)
+})
+
+//here
+// ```js
+// function readFile(fileName, callback) {
+//   console.log("Reading file:", fileName);
+
+//   setTimeout(() => {
+//     let fileData = "File content of " + fileName;
+
+//     callback(fileData); // <-- main part
+//   }, 2000);
+// }
+
+// readFile("data.txt", (data) => {
+//   console.log("File data received:", data);
+// });
+// ```
+
+// ---
+
+// ### Step 1: Call `readFile`
+
+// When you run:
+
+// ```js
+// readFile("data.txt", (data) => {
+//   console.log("File data received:", data);
+// });
+// ```
+
+//  `fileName = "data.txt"`
+//  `callback = (data) => { console.log("File data received:", data); }`
+
+// So inside the function, `callback` is actually that arrow function.
+
+// ---
+
+// ### Step 2: Inside `readFile`
+
+// ```js
+// console.log("Reading file:", fileName);
+// ```
+
+//  This runs immediately.
+// So first output =
+
+// ```
+// Reading file: data.txt
+// ```
+
+// Then, `setTimeout` is scheduled.
+// JavaScript waits **2 seconds** before running the code inside `setTimeout`.
+
+// ---
+
+// ### Step 3: After 2 seconds
+
+// `setTimeout` executes:
+
+// ```js
+// let fileData = "File content of " + fileName;
+// // fileData = "File content of data.txt"
+
+// callback(fileData);
+// ```
+
+//  Here `callback(fileData)` means:
+// "Call the function we passed (`(data) => { console.log(...); }`) and give it `fileData` as an input."
+
+// So it’s the same as writing:
+
+// ```js
+// (data) => {
+//   console.log("File data received:", data);
+// }("File content of data.txt");
+// ```
+
+// ---
+
+// ### Step 4: What the callback does
+
+// That callback just logs the data:
+
+// ```
+// File data received: File content of data.txt
+// ```
+
+// ---
+
+// ###  Final Output (after running whole code):
+
+// ```
+// Reading file: data.txt
+// // (2 seconds pause)
+// File data received: File content of data.txt
+// ```
+
+// ---
+//  So the key:
+
+// * `callback(fileData)` **calls the function you gave**.
+// * It passes `"File content of data.txt"` as the `data` argument.
+// * That’s why you see `"File data received: File content of data.txt"` after 2 sec.
+
