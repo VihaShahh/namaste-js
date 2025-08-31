@@ -38,3 +38,38 @@ console.log(!true);         // false
 
 console.log(0 || "Hello"); // "Hello" (0 is falsy, "Hello" is truthy)
 console.log(0 && "Hello"); // 0 (stops at first falsy value)
+
+//===============================
+//ternary operator
+
+// let result = condition ? valueIfTrue:  valueIffalse;
+
+function checkno(num){
+    return  num % 2 == 0?"even" :  "odd";
+}
+console.log(checkno(5))//odd
+
+//======================================================
+
+//for loop
+for(let i =0; i<5; i++){
+    console.log(i)// 0,1,2,3,4
+}
+
+//while loop
+let i =0
+while(i<3){
+    console.log(i)
+    i++
+}
+
+//do while loop
+let j =0;
+do{
+    console.log(j)
+    j++
+}
+while(j<3)
+//diff is while checks condition first then runs the loop and do while runs the loop first then check the condition.
+
+
