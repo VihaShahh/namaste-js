@@ -95,3 +95,41 @@ numbers.forEach((no, index) => console.log(index, no))
 //1 2
 //2 3
 //here no is currentValue and index is index
+
+//Accessing the original array
+
+let nums = [10,2,4]
+nums.forEach((no, index, arr) =>{
+    arr[index] = no * 2 // modify the original array
+})
+console.log(nums)// [20,4,8]
+
+//array of objects
+let students =
+[
+{name: "mysitu", age: 21},
+{name: "kuku", age: 22}
+]
+students.forEach((s) =>console.log(s.name, s.age))
+//mysmitu 21
+//kuku 22
+//here students is an array of objects
+
+// Each iteration passes one object as student
+
+// We access the properties of the object using dot notation: student.name, student.age
+
+//======================================
+
+//Nested arrays example (matrix)
+
+let matrix = [
+    [1,2], [3,4]
+]
+matrix.forEach(row =>{
+    row.forEach(no => console.log(no))
+})
+//1
+//2
+//3
+//4
