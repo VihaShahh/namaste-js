@@ -133,3 +133,36 @@ matrix.forEach(row =>{
 //2
 //3
 //4
+
+// in map each key can only map to one value.
+//if you add multiple values to the same key it will overwrite the previous one.
+
+let mapp = new Map()
+mapp.set("hobby", "reading")
+mapp.set("hobby", "dancing")//overwrites reading
+mapp.set("hobby" , "singing")//overwrites dancing
+console.log(mapp) 
+
+//Map(1) { 'hobby' => 'Singing' }//here only one key 'hobby' with value 'singing'Map(1) — meaning “a Map with 1 entry.”
+//=========================================
+// if you want multiple values for one key you can store them inside array or object as the value.
+
+let mapp1 = new Map()
+mapp1.set("hobby", ["reading", "dancing", "singing"])
+mapp1.set("marks", {math:90, science:85})
+
+for(let [key, value] of mapp1){
+    console.log(key, value)
+}
+//hobby : [ 'Reading', 'Dancing', 'Singing' ]
+//marks : { math: 90, science: 85 }
+
+// So here:
+
+// "hobby" → key
+
+// ["Reading", "Dancing", "Singing"] → value (array)
+
+// "marks" → key
+
+// { math: 90, science: 85 } → value (object)
