@@ -1,5 +1,5 @@
 //1. Object Destructuring
-const { Children } = require("react");
+
 
 const person = { name1: "viha" , age: 22}
 const {name1, age} = person;
