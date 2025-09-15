@@ -27,7 +27,7 @@ city = "Vadodara";
 var city = "Ahmedabad"; 
 
 console.log(name); // its give undefined, not ReferenceError! like let, const
-var name = "Viha";
+var name3 = "Viha";
 //==================================
 function test() {
   var x = 1;
