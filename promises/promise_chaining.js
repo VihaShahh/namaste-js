@@ -46,3 +46,16 @@ function proceedToPayment(orderId) {
 function validCart(cart) {
     return true; //  now the cart is valid
 }
+//Start with a cart.
+
+// Call createOrder(cart) → returns a promise.
+
+// After 2 seconds → promise resolves with "123".
+
+// First .then() logs orderId.
+
+// Second .then() calls payment API (mocked).
+
+// Third .then() logs payment success.
+
+// .catch() only runs if there’s an error.
