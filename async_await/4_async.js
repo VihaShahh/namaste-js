@@ -26,3 +26,9 @@ handlePromise();
 // await p7	returns immediately (already resolved)	waits 6s more (until total 9s)
 // Total time for function	9s	9s
 // Order of logs	Hi → p6 logs → p7 logs immediately	Hi → p6 logs → wait → p7 logs
+
+// Case 1 (p6=9, p7=3):
+// p7 resolves early, so by the time we await p7, it’s already done → immediate return.
+
+// Case 2 (p6=3, p7=9):
+// p7 is still pending when we reach its await, so we must wait until it finishes.
