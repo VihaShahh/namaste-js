@@ -113,3 +113,15 @@ outer();
 //Inner functions can always access parent/global variables (scope chain).
 
 //Outer scope cannot access inner scope variables.
+
+// 3. Window / Global object difference
+
+// var variables attach to window (in browsers).
+
+// let and const do not.
+var b = 15;
+let a = 10;
+
+console.log(window.b); // 15 
+console.log(window.a); // undefined 
+// This makes let and const safer → no accidental overwriting of global object properties.
