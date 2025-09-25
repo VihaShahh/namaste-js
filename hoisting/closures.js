@@ -93,7 +93,7 @@ function z() {
     let a = 7;         // in y's scope
 
     function x() {
-      console.log(a, b); // 👈 x can access both a (from y) and b (from z)
+      console.log(a, b); //  x can access both a (from y) and b (from z)
     }
 
     x();               // call x here
