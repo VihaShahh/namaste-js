@@ -86,15 +86,64 @@ z();
 
 // z() → you are cooking the dish (executing the function).
 
-function xyz(){
-    let a = 20
-    function y(){
-        let b =30
-        function x(){
-        console.log(a,b)
+function z() {
+  let b = 10;          // in z's scope
+
+  function y() {
+    let a = 7;         // in y's scope
+
+    function x() {
+      console.log(a, b); // 👈 x can access both a (from y) and b (from z)
     }
-    x()
+
+    x();               // call x here
+  }
+
+  y();                 // call y here
 }
-y()
+
+z(); // Output: 7 10
+
+//==========================================
+function z() {
+  let b = 10;          // in z's scope
+
+  function y() {
+    let a = 7;         // in y's scope
+
+    function x() {
+      console.log(a, b); // x can access both a (from y) and b (from z)
+    }
+
+    x();               // call x here
+  }
+
+  y();                 // call y here
 }
-xyz()
+
+z(); // Output: 7 10
+
+//===============================================
+function x(){
+    var a = 10;
+    setTimeout(function(){
+        console.log(a)
+    }, 3000)
+    console.log("Namaste Javascript")
+}
+x();
+
+// x() is called.
+
+// Inside x, var i = 1 is created.
+
+// setTimeout is called → JS engine registers the callback function somewhere in its Web APIs environment (not in call stack). It also sets a timer of 3000ms.
+
+// Next line runs immediately → "Namaste Javascript" is printed.
+
+// After 3 seconds → Event loop pushes the callback into call stack → callback executes → console.log(i) prints 1.
+
+// Namaste Javascript
+// 1 (after 3s)
+//======================================================
+
