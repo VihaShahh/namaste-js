@@ -141,3 +141,144 @@ outer()(); // ReferenceError
 //   a = 10;
 //   return inner;
 // }
+
+function outer() {
+  let a = 10;
+  function inner() {
+    console.log(a);
+  }
+  return inner;
+}
+outer()(); // 10
+
+//outer() is called.
+
+// Inside outer:
+
+// let a = 10; runs immediately → variable a is initialized.
+
+// Function inner is defined.
+
+// outer() returns inner.
+
+// () after outer() → calls inner, but by now a already exists and has value 10.
+
+// So console.log(a) logs 10.
+
+//  No TDZ issue because a was initialized before inner was called.============================================
+
+function outer() {
+  let a; // 'a' is declared here but not yet initialized
+  function inner() {
+    console.log(a); // inner closes over 'a'
+  }
+  a = 10; // 'a' is assigned value 10
+  return inner; // return the function 'inner'
+}
+outer()(); // logs 10
+
+//Multi-level closure
+
+function outest() {
+  var c = 20;
+
+  function outer(str) {
+    let a = 10;
+
+    function inner() {
+      console.log(a, c, str);
+    }
+
+    return inner;
+  }
+
+  return outer;
+}
+
+outest()("Hello There")(); // 10 20 "Hello There"
+// Step 1: What happens when you call outer()?
+
+// outer() runs.
+
+// Inside it, a = 10 is created.
+
+// outer returns the function inner, not its result.
+
+// So:
+
+// let x = outer();
+// console.log(x); 
+// // logs the code of inner: function inner() { console.log(a); }
+
+
+// Now x is basically the function inner.
+
+// Step 2: Why outer()(); ?
+
+// First () → calls outer, which returns inner.
+
+// Second () → calls the returned function inner.
+
+// So:
+
+// outer()(); 
+// // same as:
+// let fn = outer(); 
+// fn(); // runs inner
+
+// Step 3: What if you just write outer()?
+// outer(); 
+
+
+// This only executes outer, which returns inner.
+// But since you don’t call that returned function, nothing is logged.
+
+// In short:
+
+// outer() → gives you the inner function.
+
+// outer()(); → first gets inner, then calls it immediately.
+
+
+//====================================================
+//shadowing
+
+function outest() {
+  let c = 20;
+
+  function outer(str) {
+    let a = 10;
+
+    function inner() {
+      console.log(a, c, str);
+    }
+
+    return inner;
+  }
+
+  return outer;
+}
+
+let a = 100;
+outest()("Hello There")(); 
+
+// What about let a = 100; outside?
+
+// That global a = 100 is irrelevant here, because:
+
+// inner first looks for a in its own scope chain.
+
+// Closest a is inside outer (let a = 10).
+
+// That shadows the global a.
+//  So 10 is printed, not 100.
+//  Rule: Closure always uses the nearest variable in its lexical scope chain. If it doesn’t find it, only then it goes up.
+
+let a = 100;
+
+function test() {
+  let a = 10; // shadows global 'a'
+  console.log(a);
+}
+test(); // 10
+console.log(a); // 100
