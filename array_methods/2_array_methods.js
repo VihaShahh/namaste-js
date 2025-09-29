@@ -38,7 +38,7 @@ arr.unshift(-1) //[-1,0,2,3]
 
 //slice()
 
-// 👉 Think: "copy / extract part of the array (without changing original)"
+//  Think: "copy / extract part of the array (without changing original)"
 
 let arr7 = [10, 20, 30, 40, 50];
 
@@ -56,7 +56,7 @@ console.log(arr7); // [10, 20, 30, 40, 50]
 //splice()
 // It is used to remove, insert, or replace elements in an array.
 
-// ⚠️ It changes (mutates) the original array.
+// It changes (mutates) the original array.
 
 // arr.splice(start, deleteCount, item1, item2, ...)
 
@@ -77,7 +77,7 @@ arr.splice(1, 2);
 console.log(arr); // [10, 40, 50]
 ```
 
-// 👉 Step by step:
+//  Step by step:
 
 // * Start at index `1` → that’s `20`.
 // * Delete `2` elements → `20` and `30` are removed.
@@ -98,7 +98,7 @@ arr.splice(1, 0, 99, 88);
 console.log(arr); // [10, 99, 88, 40, 50]
 ```
 
-// 👉 Step by step:
+//  Step by step:
 
 // * Start at index `1`.
 // * Delete `0` items.
@@ -119,7 +119,7 @@ arr.splice(2, 1, 777);
 console.log(arr); // [10, 99, 777, 40, 50]
 ```
 
-// 👉 Step by step:
+// Step by step:
 
 // * Start at index `2` → element is `88`.
 // * Delete `1` item → removes `88`.
@@ -129,7 +129,7 @@ console.log(arr); // [10, 99, 777, 40, 50]
 
 // ---
 
-// ### ✅ Summary (easy to remember)
+// ###  Summary (easy to remember)
 
 // * `splice( start, deleteCount )` → just removes.
 // * `splice( start, 0, newItems )` → just inserts.
@@ -155,7 +155,7 @@ console.log(arr2) //[1,2,3]
 
 //===========================================
 //flat()
-// 👉 Think: "flatten nested arrays into one array"
+//  Think: "flatten nested arrays into one array"
 // (It removes inner arrays and brings elements up)
 let arr4 = [1, [2, 3], [4, [5, 6]]];
 
@@ -167,15 +167,15 @@ console.log(arr4.flat(1));
 console.log(arr4.flat(2)); 
 // [1, 2, 3, 4, 5, 6]
 
-//📌 By default flat() flattens 1 level deep.
+// By default flat() flattens 1 level deep.
 // If you want all levels, use:
 
 arr.flat(Infinity);
 
 //===========================================================
-// 2️⃣ flatMap()
+// 2️ flatMap()
 
-// 👉 Think: "map first, then flatten 1 level"
+//  Think: "map first, then flatten 1 level"
 // It’s like map() + flat(1) in one step.
 
 let words = ["hello", "world"];

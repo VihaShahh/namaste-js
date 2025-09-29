@@ -220,7 +220,7 @@ const count  = fruits.reduce((acc, fruit) => {
 
 // ✅ So the || 0 ensures we start from 0 when the fruit is new.
 
-// Without || 0, the first time it sees "apple", it would try undefined + 1 → NaN ❌.
+// Without || 0, the first time it sees "apple", it would try undefined + 1 → NaN .
 //=======================================
 //Average score (one pass) bdha no 
 const students = [
