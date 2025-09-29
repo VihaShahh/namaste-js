@@ -111,3 +111,216 @@ var bar = function () {
 };
 
 bar(); //  Works now
+
+
+//=========================================================
+// Storing Functions in Variables
+
+var greet = function(){
+    console.log("hi")
+}
+
+greet()// hi
+// Here, greet is a variable holding a function.
+
+// Just like a number (var x = 10;), but instead of a number, the value is a function.
+
+// This is called a function expression.
+
+//===============================================
+//Passing Functions as Arguments
+
+var b = function (param1) {
+  console.log(param1);
+};
+
+b(function () {
+  console.log("Hello from passed function");
+});
+
+// here We passed an anonymous function as param1.
+
+// But inside b, we just console.log(param1) → so it prints the function definition itself, not the result.
+
+// Step by step:
+
+// You call b(...) and pass a function as param1.
+
+// So inside b,
+// param1 = function () { console.log("Hello from passed function"); }
+
+// Inside b, you do:
+
+// console.log(param1);
+
+
+// That does not call param1.
+// It just logs the function object itself.
+
+// Therefore, the output you see in the console is something like:
+
+// ƒ () {
+//   console.log("Hello from passed function");
+// }
+
+
+// or, in Node.js, it might look like:
+
+// [Function (anonymous)]
+
+// Why "Hello from passed function" is not printed:
+
+// Because that message only appears if you execute the function by writing:
+
+// param1(); // call it
+
+
+// But in your code, you only logged the function reference, not executed it.
+
+// If we actually want to call the passed function (turning it into a callback):
+var b = function (param1) {
+  param1(); // invoking the passed function
+};
+
+b(function () {
+  console.log("Hello from passed function");
+});
+//output: Hello from passed function
+
+//=======================================================
+//Returning Functions (Higher-Order Functions)
+var b = function () {
+  return function () {
+    console.log("Hello from returned function");
+  };
+};
+
+var returnedFunc = b();   // b returns a function
+returnedFunc();           // "Hello from returned function"
+
+// What’s happening here?
+
+// b is a function.
+
+// When you call b(), it executes and returns another function (not a value, but a whole function itself).
+
+// var returnedFunc = b(); → now returnedFunc is holding the returned function.
+
+// Calling returnedFunc(); executes that returned function, logging "Hello from returned function".
+
+//  If you want, you can chain calls directly:
+
+// b()(); 
+
+
+// b() → gives back the inner function.
+
+// () → executes that inner function.
+
+// This is called a Higher-Order Function (HOF) because it returns another function
+
+//==================================================
+// Functional Programming
+
+// Because functions can be passed around, we get powerful array methods like map, filter, reduce.
+
+let nums = [1, 2, 3, 4];
+
+let squared = nums.map(function (n) {
+  return n * n;
+});
+
+//or - using arrow function
+//let squared = nums.map(n => n * n);
+
+
+console.log(squared); // [1, 4, 9, 16]
+
+// =====================================================
+//  Dynamic Behavior
+
+// Functions can make other functions flexible & reusable:
+function calculate(a, b, operation) {
+  return operation(a, b);
+}
+
+console.log(calculate(5, 3, function (x, y) { return x + y; })); // 8
+console.log(calculate(5, 3, function (x, y) { return x * y; })); // 15
+
+// calculate is a higher-order function because it takes another function (operation) as an argument.
+
+// Parameters:
+
+// a → first number
+
+// b → second number
+
+// operation → a function that defines what to do with a and b
+
+// Inside calculate, it simply does:
+
+// return operation(a, b);
+
+
+// This means: "Whatever function you pass as operation, call it with a and b."
+
+// Step 2: First Call (Addition)
+// console.log(calculate(5, 3, function (x, y) { return x + y; }));
+
+
+// Here, we call calculate with:
+
+// a = 5
+
+// b = 3
+
+// operation = function (x, y) { return x + y; } (an anonymous function)
+
+// Now inside calculate:
+
+// operation(5, 3) → function(x, y) { return x + y; }(5, 3)
+
+
+// This executes the anonymous function:
+
+// x = 5, y = 3
+
+// return x + y → return 8
+
+// So, calculate returns 8.
+// console.log prints:
+
+// 8
+//  Step 3: Second Call (Multiplication)
+// console.log(calculate(5, 3, function (x, y) { return x * y; }));
+
+
+// Here, operation is a different function:
+
+// function (x, y) { return x * y; }
+
+
+// Inside calculate:
+
+// operation(5, 3) → function(x, y) { return x * y; }(5, 3)
+
+
+// Substitution:
+// 5 * 3 = 15
+
+// So, calculate returns 15.
+// console.log prints:
+
+// 15
+
+// Why Is This Powerful?
+
+// calculate does not know what operation will be used.
+
+// You can inject behavior dynamically by passing different functions.
+
+// The same calculate function works for addition, multiplication, subtraction, division, or even custom formulas without rewriting it.
+
+// calculate = reusable “engine”
+
+// operation = custom “logic” (you decide what math to perform)
