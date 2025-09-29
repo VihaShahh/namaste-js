@@ -274,11 +274,11 @@ outest()("Hello There")();
 //  So 10 is printed, not 100.
 //  Rule: Closure always uses the nearest variable in its lexical scope chain. If it doesn’t find it, only then it goes up.
 
-let a = 100;
+let l = 100;
 
 function test() {
-  let a = 10; // shadows global 'a'
-  console.log(a);
+  let l = 10; // shadows global 'a'
+  console.log(l);
 }
 test(); // 10
-console.log(a); // 100
+console.log(l); // 100
