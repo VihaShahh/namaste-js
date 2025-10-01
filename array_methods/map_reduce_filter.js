@@ -235,3 +235,12 @@ console.log(output); // ["Alok", "Ashish", "Ankit"]
 // Map step: changes each remaining item.
 
 // No “AND” or “OR” needed — each step simply works on the output of the previous step
+
+//=================================================================
+createOrder(cart, function (orderId) {
+  proceedToPayment(orderId, function (paymentInfo) {
+    showOrderSummary(paymentInfo, function (balance) {
+      updateWalletBalance(balance);
+    });
+  });
+});
